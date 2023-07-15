@@ -16,7 +16,7 @@ DEPFILES=$(patsubst $(DIRSRC)/%.c,$(DIROBJ)/%.d,$(SRC_C))
 # automatically add the -I onto each include directory
 CFLAGS=-I$(DIRSRC) $(OPT) $(DEPFLAGS)
 
-all: $(DIRBIN)/$(BINARY)
+all: $(DIRBIN)/$(BINARY) source.exe source
 
 $(DIRBIN)/$(BINARY): $(OBJECTS)
 	@if not exist $(DIRBIN) mkdir $(DIRBIN)
@@ -28,8 +28,21 @@ $(DIROBJ)/%.o: $(DIRSRC)/%.c
 	@if not exist $(DIROBJ) mkdir $(DIROBJ)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
+source: source.c
+	$(CC) -E -o source source.c
+
+source.s: source.c
+	$(CC) -S -o source.s source.c
+
+source.o: source.s
+	$(CC) -c -o source.o source.s
+
+source.exe: source.o
+	$(CC) -o source.exe source.o
+
 clean:
 	rd /q /s $(DIROBJ) $(DIRBIN)
+	del /q source.exe source.o source.s source
 
 # @ silences the printing of the command
 # $(info ...) prints output
