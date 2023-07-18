@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "name": "(Windows) Launch main.exe",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/main.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "console": "externalTerminal"
+        },
+        {
+            "name": "(Windows) Launch source.exe",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "source.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "console": "externalTerminal"
+        },
+    ],
+    "version": "2.0.0"
+}
