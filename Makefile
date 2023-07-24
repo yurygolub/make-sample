@@ -14,13 +14,16 @@ OBJECTS=$(patsubst $(DIRSRC)/%.c,$(DIROBJ)/%.o,$(SRC_C))
 DEPFILES=$(patsubst $(DIRSRC)/%.c,$(DIROBJ)/%.d,$(SRC_C))
 
 # automatically add the -I onto each include directory
-CFLAGS=-g -I$(DIRSRC) $(OPT) $(DEPFLAGS)
+CFLAGS=-I$(DIRSRC) $(OPT) $(DEPFLAGS)
 
-all: $(DIRBIN)/$(BINARY) source.exe source
+all: $(DIRBIN)/$(BINARY)
+
+debug: CFLAGS += -g
+debug: $(DIRBIN)/$(BINARY) source.exe source
 
 $(DIRBIN)/$(BINARY): $(OBJECTS)
 	@if not exist $(DIRBIN) mkdir $(DIRBIN)
-	$(CC) -g -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 
 # only want the .c file dependency here, thus $< instead of $^.
 #
