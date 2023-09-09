@@ -4,7 +4,7 @@
 int main()
 {
     printf("ertghrthr\r\n");
-	run();
+    run();
 
     return 0;
 }

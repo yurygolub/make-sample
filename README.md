@@ -31,6 +31,8 @@ You can install **make** via **chocolatey** https://docs.chocolatey.org/en-us/ch
     choco install make
     ```
 
+> If **bash** is in the **Path** environment variable, **make** will execute makefile in **bash**
+
 ## Build and Run
 
 ```sh
