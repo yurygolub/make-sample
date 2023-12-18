@@ -22,13 +22,13 @@ debug: CFLAGS += -g
 debug: $(DIRBIN)/$(BINARY) source.exe source
 
 $(DIRBIN)/$(BINARY): $(OBJECTS)
-	@if not exist $(DIRBIN) mkdir $(DIRBIN)
+	mkdir -p $(DIRBIN)
 	$(CC) $(CFLAGS) -o $@ $^
 
 # only want the .c file dependency here, thus $< instead of $^.
 #
 $(DIROBJ)/%.o: $(DIRSRC)/%.c
-	@if not exist $(DIROBJ) mkdir $(DIROBJ)
+	mkdir -p $(DIROBJ)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 source: source.c
@@ -44,8 +44,8 @@ source.exe: source.o
 	$(CC) -g -o source.exe source.o
 
 clean:
-	rd /q /s $(DIROBJ) $(DIRBIN)
-	del /q source.exe source.o source.s source source.pdb source.ilk
+	rm -r -f $(DIROBJ) $(DIRBIN)
+	rm -f source.exe source.o source.s source source.pdb source.ilk
 
 # @ silences the printing of the command
 # $(info ...) prints output
@@ -58,4 +58,4 @@ diff:
 -include $(DEPFILES)
 
 # add .PHONY so that the non-targetfile - rules work even if a file with the same name exists.
-.PHONY: all clean diff
+.PHONY: all debug clean diff
